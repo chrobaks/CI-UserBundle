@@ -102,11 +102,16 @@ body {
 #configInfoTpl ul hr {
       border-color:#4AA14A !important;
 }
+
 #CloneContent {
     border: 1px solid #215D7C;
     padding-top: 10px;
     background-color: #D7EFE3;
     color: #215D7C;
+}
+#CloneContent > ul > li,
+#CloneContent > ul > li > ul li{
+    word-wrap:break-word;
 }
 #CloneContent > ul > li > ul {
     margin-left: 30px !important;
