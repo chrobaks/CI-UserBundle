@@ -260,7 +260,7 @@ class Entitiesmodel extends MY_Model
 
         foreach($masterConf as $k=>$v){
             if ($v->dependence_level < 1 && $entitiesConfigId < 1) {
-                if ($this->entity->create(['name'=>'config_'.$v->name], false))
+                if ($this->entity->create(['name'=>$v->configName], false))
                 {
                     $entitiesConfigId = $this->entity->getLastInsertId();
                 }
