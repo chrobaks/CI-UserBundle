@@ -35,7 +35,6 @@ $(document).ready( function ()
     });
     // set ajax form submit
     $('form.formAjaxRequest').on('submit', function (e) {
-        console.log('formAjaxRequest');
         e.preventDefault();
         app.ajaxRequest.setRequestForm($(this),$(this).attr('action'),$('div.forminfo:eq(0) > p:eq(0)',$(this)));
         return false;
@@ -48,6 +47,7 @@ $(document).ready( function ()
     // set ajax container event
     $('.ajax-container-request').on('click', function (e) {
         e.preventDefault();
+
         app.ajaxRequest.setRequestContainerObj($(this));
     });
     // radio groups

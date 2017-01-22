@@ -27,9 +27,13 @@ class Signupmodel extends MY_Model
     }
     public function create ()
     {
+        $salt = $this->userservice->getSalt();
+        $password = $this->passwordmanager->passwordHash($this->post['password'].$salt);
+
         $userData = [
             'username'=>$this->post['username'],
-            'password'=>$this->passwordmanager->passwordHash($this->post['password']),
+            'password'=>$password,
+            'salt'=>$salt,
             'email'=>$this->post['email'],
             'role' => 'user'
         ];

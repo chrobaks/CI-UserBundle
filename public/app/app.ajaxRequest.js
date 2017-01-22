@@ -82,7 +82,7 @@ app.ajaxRequest = (function (app)
     {
         setRequestCsrf (dataVal);
 
-        if (obj.length == 1)
+        if (obj.length === 1)
         {
             if(obj.attr('data-id')) {
                 dataVal['id'] = obj.attr('data-id');
@@ -201,21 +201,13 @@ app.ajaxRequest = (function (app)
     {
         // request data value object
         var dataVal = {};
-        var container = '';
-        var list = null;
 
-        if (obj.closest('[data-container=ajax]')) {
-            container = obj.closest('[data-container=ajax]');
-        }
-        if (obj.closest('[data-container=ajax-list]')) {
-            container = obj.closest('[data-container=ajax-list]');
-            list = $('input,select',container);
-        }
-        if (list) {
-            setAttrData(list, dataVal);
+        if (obj.closest('[data-container=ajax-list]').length) {
+            setAttrData($('input,select',obj.closest('[data-container=ajax-list]')), dataVal);
         } else {
             setAttrData(obj,dataVal);
         }
+
         sendRequestObj(dataVal,requestUrl(obj));
     }
     function setRequestConfirm (containerCss, obj)

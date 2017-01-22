@@ -15,7 +15,8 @@ $config['userentity'] = [
         'email'=>['VARCHAR','UNIQUE'],
         'role'=>['VARCHAR'],
         'confirmation'=>['VARCHAR'],
-        'last_login'=>['DATETIME']
+        'last_login'=>['DATETIME'],
+        'salt'=>['VARCHAR','UNIQUE']
     ],
     'queryCols' => "id,username,email,role,confirmation,DATE_FORMAT(createAt,'%d.%m.%Y %H:%i') as createAt,DATE_FORMAT(last_login,'%d.%m.%Y %H:%i') as last_login",
     'queryOrderBy' => ['username'=>'asc'],

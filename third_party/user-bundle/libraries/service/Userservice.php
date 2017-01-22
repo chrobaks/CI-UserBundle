@@ -36,7 +36,7 @@ class Userservice
         $this->user = $this->entity->find('*',['username'=>$post['username']],1);
 
         if ($this->user !== null) {
-            if($this->CI->passwordmanager->passwordVerify($post['password'],$this->user->password)) {
+            if($this->CI->passwordmanager->passwordVerify($post['password'].$this->user->salt,$this->user->password)) {
                 if ($this->user->confirmation === '1') {
                     if ($this->loginSession()) {
                         $this->loginUpdate();
@@ -85,6 +85,17 @@ class Userservice
     public function getConfirmationHash ()
     {
         return $this->confirmationProperties['confirmation_hash'];
+    }
+    public function getSalt ()
+    {
+        $salt = $this->CI->passwordmanager->randomPassword(16,30,true,true);
+        $query = $this->entity->find('id',['salt'=>$salt],1);
+
+        if ($query == null) {
+            return $salt;
+        } else {
+            return $this->getSalt();
+        }
     }
     private function loginSession ()
     {

@@ -68,10 +68,11 @@ class Loginmodel extends MY_Model
         {
             $this->view['status'] = 'confirm';
             $this->view['confirmationHash'] = $confirmationHash;
+            $salt = $this->entity->columnData('salt',['id'=>$userConfirmation->user_id]);
 
-            if (isset($this->post['password']) && isset($this->post['username']))
+            if (isset($this->post['password']) && isset($this->post['username']) && is_string($salt) )
             {
-                $password = $this->passwordmanager->passwordHash($this->post['password']);
+                $password = $this->passwordmanager->passwordHash($this->post['password'].$salt);
                 $where = [
                     'id' => $userConfirmation->user_id,
                     'username' => $this->post['username'],
