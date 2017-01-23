@@ -18,7 +18,7 @@ $config['userentity'] = [
         'last_login'=>['DATETIME'],
         'salt'=>['VARCHAR','UNIQUE']
     ],
-    'queryCols' => "id,username,email,role,confirmation,DATE_FORMAT(createAt,'%d.%m.%Y %H:%i') as createAt,DATE_FORMAT(last_login,'%d.%m.%Y %H:%i') as last_login",
+    'queryCols' => "id,username,email,role,confirmation,DATE_FORMAT(createAt,'%d.%m.%Y %H:%i') as createAt,DATE_FORMAT(last_login,'%d.%m.%Y %H:%i') as last_login, salt",
     'queryOrderBy' => ['username'=>'asc'],
     'queryDefined' => [],
     'dependenceEntities' => ['userconfirmation']

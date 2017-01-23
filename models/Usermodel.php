@@ -8,12 +8,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usermodel extends MY_Model
 {
+    private $user;
+
     public function __construct()
     {
         parent::__construct('userentity');
-
+        $this->user = $this->entity->find('',['id'=>$this->session->userdata('id')],1);
         $this->view = [
-            'user' => $this->entity->find('',['id'=>$this->session->userdata('id')],1)
+            'user' => $this->user
         ];
     }
     public function update ()
@@ -28,7 +30,7 @@ class Usermodel extends MY_Model
     public function newpass ()
     {
         $this->load->library('manager/passwordmanager');
-        $passhash = $this->passwordmanager->passwordHash($this->post['password']);
+        $passhash = $this->passwordmanager->passwordHash($this->post['password'].$this->user->salt);
 
         if ($this->entity->update(['password'=>$passhash], ['id'=>$this->session->userdata('id')], false)) {
             $this->messagemanager->setInfo('page_info_update_password_success');
