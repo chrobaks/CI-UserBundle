@@ -17,4 +17,9 @@ class Users extends MY_Controller
         $this->model->all();
         parent::all();
     }
+    public function update ()
+    {
+        $this->model->alter('users/update','update');
+        $this->setResponse();
+    }
 }

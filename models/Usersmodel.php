@@ -46,7 +46,15 @@ class Usersmodel extends MY_Model
         $this->post['password'] = $this->passwordmanager->anonymPassword();
         $this->entity->create($this->post);
     }
+    public function update ()
+    {
+        parent::update();
 
+        if (isset($this->post['confirmation'])) {
+            $where = ['user_id' => $this->post['id'],'confirmation_type' => 'signup'];
+            $this->entity->deleteDependence('userconfirmation',$where);
+        }
+    }
     private function getFilteredUsers ()
     {
         $where = [];
